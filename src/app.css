@@ -1,0 +1,15 @@
+/* src\app.css */
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@plugin "daisyui" {
+  themes: wireframe --default, black --prefersdark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: sans-serif;
+}

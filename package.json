@@ -37,5 +37,11 @@
 		"typescript-eslint": "^8.58.1",
 		"vite": "^8.0.7",
 		"wrangler": "^4.81.0"
-	}
+	},
+	"dependencies": {
+		"daisyui": "^5.5.23"
+	},
+  "overrides": {
+    "cookie": "^1.0.2"
+  }
 }

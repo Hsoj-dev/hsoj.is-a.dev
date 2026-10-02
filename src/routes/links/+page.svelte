@@ -1,8 +1,10 @@
-<script>
+<!-- src\routes\links\+page.svelte -->
+<script lang="ts">
 	import { resolve } from "$app/paths";
 </script>
-<div class="border-2">
-    <div class="flex items-center border-b-2 h-8 px-2">
+
+<div class="group border-2">
+    <div class="flex items-center border-b-2 h-8 px-2 group-hover:bg-base-content group-hover:text-base-100">
         <p>> LINKS</p> 
     </div>
     <div class="p-5">

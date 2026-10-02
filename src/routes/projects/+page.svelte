@@ -1,11 +1,5 @@
-<!-- src\routes\projects\+page.svelte -->
-<script lang="ts">
-    import { resolve } from "$app/paths";
-</script>
-
-<div><p>List of Projects</p></div>
-
-<ul>
-    <li><a href={resolve('/projects/hsoj-bot')}>Hsoj-Bot</a></li>
-    <li><a href={resolve('/projects/scrabbly')}>Scrabbly</a></li>
-</ul>
+<div class="border-2">
+    <div class="flex items-center border-b-2 h-8 px-2">
+        <p>> MY PROJECTS</p> 
+    </div>
+</div>

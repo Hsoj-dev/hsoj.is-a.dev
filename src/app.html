@@ -1,3 +1,4 @@
+<!-- src\app.html -->
 <!doctype html>
 <html lang="en">
 	<head>
@@ -10,3 +11,12 @@
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
+
+<script>
+  (function () {
+    try {
+      var p = JSON.parse(localStorage.getItem('hsoj-prefs') || '{}').palette || 'mono';
+      document.documentElement.dataset.palette = p;
+    } catch (e) {}
+  })();
+</script>

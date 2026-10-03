@@ -28,7 +28,7 @@
                 <p>"Live, Laugh, Toaster Bath"</p>
                 <p class="text-right italic">- Unknown</p>
             </div>
-            <p class="self-center font-bold flex items-center gap-2">
+            <p class="self-center font-bold flex items-center gap-2 text-xs md:text-base">
                 <span class="status-dot"></span>
                 Status: Still Alive and Kickin'
             </p>

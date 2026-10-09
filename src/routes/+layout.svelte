@@ -1,4 +1,6 @@
+<!-- src\routes\+layout.svelte -->
 <script lang="ts">
+    import { page } from '$app/state';
     import '../app.css';  
 	import favicon from '$lib/assets/favicon.svg';
     import { onMount } from 'svelte';
@@ -10,6 +12,11 @@
 
 	let { children } = $props();
 
+    const OS_PATH = '/projects/hsojOS';
+    let isHsojOS = $derived(
+      page.url.pathname === OS_PATH || page.url.pathname.startsWith(OS_PATH + '/')
+    );
+  
     onMount(loadPrefs); // must stay above the effect
     $effect(() => {
         applyPalette();
@@ -22,21 +29,25 @@
     <link rel="icon" href={favicon} />
 </svelte:head>
 
-<Background />
-
-<div class="flex flex-col min-h-screen items-center justify-center">
-    <div class="bg-base-100 w-full max-w-4xl h-fit my-5">
-        <div class="flex flex-col gap-5 bg-base-100 m-3 h-auto border-2 border-dashed border-base-content p-3 md:m-5 md:p-5">
-            
-            <Header />
-            
-            {@render children()}
-
-            <p class="text-center">© 2026 Hsoj-Dev. All rights reserved</p>
-
+{#if isHsojOS}
+  {@render children()}
+{:else}
+    <Background />
+    
+    <div class="flex flex-col min-h-screen items-center justify-center">
+        <div class="bg-base-100 w-full max-w-4xl h-fit my-5">
+            <div class="flex flex-col gap-5 bg-base-100 m-3 h-auto border-2 border-dashed border-base-content p-3 md:m-5 md:p-5">
+                
+                <Header />
+                
+                {@render children()}
+    
+                <p class="text-center">© 2026 Hsoj-Dev. All rights reserved</p>
+    
+            </div>
         </div>
     </div>
-</div>
-
-<BackToTop />
-<DevSwitcher />
+    
+    <BackToTop />
+    <DevSwitcher />
+{/if}

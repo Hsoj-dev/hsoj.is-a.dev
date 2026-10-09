@@ -25,7 +25,7 @@ export const projects: Project[] = [
         year: 2026,
         stack: ['Sveltekit', 'Taiwind', 'Cloudflare'],
         repo: 'https://github.com/Hsoj-dev/hsoj.is-a.dev',
-        demo: 'https://hsoj-is-a-dev.pages.dev/',
+        demo: 'https://hsoj.is-a.dev',
     },
     {
         slug: 'hsoj-bot',
@@ -41,12 +41,12 @@ export const projects: Project[] = [
     {
         slug: 'hsojOS',
         name: 'hsojOS',
-        tagline: 'My Personal WebOS ',
+        tagline: 'My Personal WebOS',
         status: 'wip',
         year: 2026,
-        stack: ['Sveltekit', 'TypeScript', 'Tailwind'],
+        stack: ['Svelte', 'TypeScript', 'Tailwind'],
         repo: 'https://github.com/Hsoj-dev/hsojOS',
-        demo: 'https://example.com'
+        demo: 'https://hsoj.is-a.dev/projects/hsojOS'
     },
     {
         slug: 'scrabbly',
@@ -68,5 +68,15 @@ export const projects: Project[] = [
     // page: '/projects/saypi-blog',
     repo: 'https://github.com/Hsoj-dev/saypi-blog',
     demo: 'https://saypi.blog',
+  },
+  {
+      slug: 'hsoj-tab',
+      name: 'hsoj-tab',
+      tagline: 'My Personal New Tab Page',
+      status: 'wip',
+      year: 2026,
+      stack: ['Svelte', 'TypeScript', 'Tailwind'],
+      repo: 'https://github.com/Hsoj-dev/hsoj-tab',
+      demo: 'https://hsoj.is-a.dev/projects/hsoj-tab'
   },
 ];

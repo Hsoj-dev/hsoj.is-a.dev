@@ -2,6 +2,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @source "./routes/projects/hsojOS";
+@source "./routes/projects/hsoj-tab/";
 
 @plugin "daisyui" {
   themes: false;

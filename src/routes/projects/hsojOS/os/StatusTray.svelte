@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsojOS\os\StatusTray.svelte -->
+<!-- src/routes/projects/hsojOS/os/StatusTray.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { sound } from './sound.svelte';
@@ -132,40 +132,76 @@
 	<!-- Battery -->
 	<span class="hidden h-4 w-0.5 bg-base-content/15 sm:block"></span>
 	<span
-		class="hidden items-center gap-1.5 sm:flex"
+		class="hidden items-center gap-1 sm:flex"
 		title={battery
-			? battery.charging
-				? 'Charging'
-				: 'On battery'
+			? `${battery.level}%${battery.charging ? ', charging' : ''}`
 			: batteryChecked
 				? 'Battery status is not available in this browser'
 				: 'Checking battery'}
+		role="img"
+		aria-label={battery
+			? `Battery ${battery.level} percent${battery.charging ? ', charging' : ''}`
+			: 'Battery status unavailable'}
 	>
-		<span class="text-base-content/60">bat</span>
-		{#if battery}
-			<span class={!battery.charging && battery.level <= 20 ? 'text-error' : ''}>
-				{battery.level}%
-			</span>
-			{#if battery.charging}
-				<svg
-					viewBox="0 0 24 24"
-					class="size-3.5 text-primary"
-					fill="currentColor"
-					role="img"
-					aria-label="Charging"
-				>
-					<path d="M13 2 4 14h6l-1 8 9-12h-6z" />
-				</svg>
-			{/if}
-		{:else}
-			<span class="text-base-content/50">n/a</span>
+		{#if battery?.charging}
+			<svg viewBox="0 0 24 24" class="size-3.5 text-primary" fill="currentColor" aria-hidden="true">
+				<path d="M13 2 4 14h6l-1 8 9-12h-6z" />
+			</svg>
 		{/if}
+		<svg
+			viewBox="0 0 24 24"
+			class="h-5 w-6 {battery ? (!battery.charging && battery.level <= 20 ? 'text-error' : '') : 'opacity-40'}"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			<rect x="2" y="7" width="16" height="10" rx="2" />
+			<path d="M22 11v2" />
+			{#if battery}
+				<!-- the fill shows how much charge is left -->
+				<rect x="4" y="9" width={Math.max(1, (12 * battery.level) / 100)} height="6" rx="1" fill="currentColor" stroke="none" />
+			{:else}
+				<path d="M10 10.5a1.5 1.5 0 1 1 2 1.4c-.6.3-1 .6-1 1.1" />
+				<path d="M11 15h.01" />
+			{/if}
+		</svg>
 	</span>
 
 	<!-- Wifi -->
 	<span class="hidden h-4 w-0.5 bg-base-content/15 sm:block"></span>
-	<span class="hidden sm:inline" title={net.title}>
-		<span class="text-base-content/60">{net.label}</span>
-		<span class={online ? '' : 'text-error'}>{net.value}</span>
+	<span
+		class="hidden sm:inline-flex {online ? '' : 'text-error'}"
+		title={net.title}
+		role="img"
+		aria-label={online ? 'Online' : 'Offline'}
+	>
+		<svg
+			viewBox="0 0 24 24"
+			class="size-5"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			{#if online}
+				<path d="M12 20h.01" />
+				<path d="M2 8.82a15 15 0 0 1 20 0" />
+				<path d="M5 12.859a10 10 0 0 1 14 0" />
+				<path d="M8.5 16.429a5 5 0 0 1 7 0" />
+			{:else}
+				<path d="M12 20h.01" />
+				<path d="M8.5 16.429a5 5 0 0 1 7 0" />
+				<path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+				<path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+				<path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+				<path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+				<path d="m2 2 20 20" />
+			{/if}
+		</svg>
 	</span>
 </div>

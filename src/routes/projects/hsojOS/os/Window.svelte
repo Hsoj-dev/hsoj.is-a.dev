@@ -2,7 +2,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { scale } from 'svelte/transition';
-	import type { AppSettings } from './apps';
+	import { APPS, type AppSettings } from './apps';
 	import { setWindowContext } from './context';
 	import { wm, TITLEBAR_HEIGHT, MIN_VISIBLE, type WindowState } from './windows.svelte';
 
@@ -23,6 +23,10 @@
 		get minimized() {
 			return win.minimized;
 		},
+		get apps() {
+			return APPS.map((a) => ({ id: a.id, title: a.title }));
+		},
+		closeApp: (appId) => wm.closeApp(appId),
 		close: () => wm.close(win.id),
 		focus: () => wm.restore(win.id),
 		open: (appId) => {

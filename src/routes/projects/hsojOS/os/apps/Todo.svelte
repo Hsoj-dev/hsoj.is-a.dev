@@ -6,18 +6,37 @@
 	type Todo = { id: string; text: string; done: boolean };
 	const KEY = 'hsojos:todos';
 
-	/** Load saved to-dos. Open ones always come first, done ones last. */
+	/** What a first-time visitor sees at the top of the list */
+	const STARTER = [
+		'Things I want to add to the OS someday:',
+		'Make the workspaces work',
+		'Add a keyboard shortcut system',
+		'Add sound effects',
+		'More desktop background options (including animated ones)',
+		'Better voicemail in the contact app',
+		'Add a splash screen to the OS',
+		'Be able to rearrange dock apps',
+		'Right click on any app and see: open, pin to dock',
+		'Desktop shortcuts to apps or external websites'
+	];
+	const starterTodos = (): Todo[] => STARTER.map((text, i) => ({ id: `starter-${i}`, text, done: false }));
+
+	/**
+	 * Load saved to-dos. Open ones always come first, done ones last.
+	 * The starter items only appear when nothing has ever been saved, so deleting them sticks.
+	 */
 	function load(): Todo[] {
 		try {
 			const raw = typeof localStorage === 'undefined' ? null : localStorage.getItem(KEY);
-			const parsed = raw ? JSON.parse(raw) : [];
-			if (!Array.isArray(parsed)) return [];
+			if (raw === null) return starterTodos();
+			const parsed = JSON.parse(raw);
+			if (!Array.isArray(parsed)) return starterTodos();
 			const items: Todo[] = parsed
 				.filter((t) => t && typeof t.id === 'string' && typeof t.text === 'string')
 				.map((t) => ({ id: t.id, text: t.text, done: Boolean(t.done) }));
 			return [...items.filter((t) => !t.done), ...items.filter((t) => t.done)];
 		} catch {
-			return [];
+			return starterTodos();
 		}
 	}
 

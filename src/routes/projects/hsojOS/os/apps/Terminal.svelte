@@ -17,7 +17,10 @@
 		'  whoami      Print the current user',
 		'  date        Print today\'s date',
 		'  time        Print the current time',
-		'  clear       Clear the screen'
+		'  open <app>  Open an app (try: open music)',
+		'  close <app> Close an app',
+		'  clear       Clear the screen',
+		'  exit        Close the terminal'
 	].join('\n');
 
 	type Entry =
@@ -87,6 +90,45 @@
 		];
 	}
 
+	/** Find an app from what was typed: its id ("images"), its name ("Image Viewer"), or the start of either */
+	function resolveApp(query: string): { id: string; title: string } | 'ambiguous' | null {
+		const q = query.trim().toLowerCase();
+		if (!q) return null;
+
+		const apps = win.apps;
+		const exact = apps.find((a) => a.id === q || a.title.toLowerCase() === q);
+		if (exact) return exact;
+
+		const partial = apps.filter(
+			(a) => a.id.startsWith(q) || a.title.toLowerCase().startsWith(q) || a.title.toLowerCase().includes(q)
+		);
+		if (partial.length === 1) return partial[0];
+		return partial.length > 1 ? 'ambiguous' : null;
+	}
+
+	function appCommand(verb: 'open' | 'close', args: string) {
+		if (!args) {
+			entries.push({
+				kind: 'out',
+				text: `usage: ${verb} <app>\napps: ${win.apps.map((a) => a.id).join(', ')}`
+			});
+			return;
+		}
+		const app = resolveApp(args);
+		if (app === null) {
+			entries.push({ kind: 'err', text: `${verb}: app not found: ${args}` });
+		} else if (app === 'ambiguous') {
+			entries.push({ kind: 'err', text: `${verb}: "${args}" matches more than one app. Be more specific.` });
+		} else if (verb === 'open') {
+			win.open(app.id);
+			entries.push({ kind: 'out', text: `Opening ${app.title}` });
+		} else if (win.closeApp(app.id)) {
+			entries.push({ kind: 'out', text: `Closed ${app.title}` });
+		} else {
+			entries.push({ kind: 'err', text: `close: ${app.title} isn't open` });
+		}
+	}
+
 	function execute(raw: string) {
 		const line = raw.trim();
 		entries.push({ kind: 'cmd', text: line });
@@ -132,6 +174,13 @@
 						hour12: true
 					})
 				});
+				break;
+			case 'open':
+			case 'close':
+				appCommand(name, args);
+				break;
+			case 'exit':
+				win.close();
 				break;
 			case 'clear':
 				entries = [];

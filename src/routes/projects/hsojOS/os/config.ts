@@ -3,6 +3,12 @@
 export const CONFIG = {
 	userName: 'hsoj',
 	version: '0.1.0',
+	/** The site shown by the Hsoj app */
+	siteUrl: 'https://hsoj.is-a.dev',
+	/** Profile picture for the lock screen: a file in your static folder. Falls back to your initial. */
+	profilePictureUrl: '/images/pic.png',
+	/** Shown under "Incorrect password". Make sure it matches your real password! */
+	lockHint: 'Hint: the name of this OS, without the "OS".',
 	/** Shown in Settings > About. Leave empty to hide the link. */
 	githubUrl: 'https://github.com/Hsoj-dev/hsojOS',
 

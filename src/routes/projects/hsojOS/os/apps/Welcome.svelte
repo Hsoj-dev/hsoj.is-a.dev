@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsojOS\os\apps\Welcome.svelte -->
+<!-- src/routes/projects/hsojOS/os/apps/Welcome.svelte -->
 <script lang="ts">
 	import { CONFIG } from '../config';
 	import { getWindowContext } from '../context';
@@ -14,7 +14,8 @@
 	];
 </script>
 
-<div class="flex h-full flex-col gap-5 p-5">
+<!-- min-h-full (not h-full) so the bottom padding is kept even when the content scrolls -->
+<div class="flex min-h-full flex-col gap-5 p-5">
 	<div class="space-y-1">
 		<h2 class="text-2xl font-bold">Welcome to HsojOS</h2>
 		<p class="text-sm text-base-content/60">A tiny desktop that lives in your browser. Quick tour:</p>

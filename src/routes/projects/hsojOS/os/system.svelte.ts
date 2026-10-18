@@ -63,8 +63,15 @@ class System {
 	 * does nothing. The shutdown screen is the fallback.
 	 */
 	shutDown() {
+		wm.closeAll(); // a fresh desktop next time
 		this.mode = 'shutdown';
 		window.close();
+	}
+
+	/** Shutdown screen's Power on button: lock screen first (if enabled), then the desktop */
+	powerOn() {
+		this.#last = Date.now();
+		this.mode = CONFIG.lockScreenEnabled ? 'locked' : 'active';
 	}
 
 	/** Leave the screen saver: lock screen if enabled, otherwise straight to the desktop */

@@ -15,8 +15,22 @@
     import PowerMenu from './os/PowerMenu.svelte';
     import StatusTray from './os/StatusTray.svelte';
     import { shell } from './os/shell.svelte';
+    import { scale } from 'svelte/transition';
 
-    const DOCK_APPS = APPS.filter((a) => a.showInDock);
+    const PINNED = APPS.filter((a) => a.showInDock);
+    
+    // Apps that aren't pinned join the dock while they have a window open, in the order they were opened
+    let runningUnpinned = $derived.by(() => {
+	const ids: string[] = [];
+	for (const w of wm.windows) {
+		if (!ids.includes(w.appId) && !PINNED.some((p) => p.id === w.appId)) ids.push(w.appId);
+	}
+	return ids.map(getApp);
+    });
+    let dockApps = $derived([...PINNED, ...runningUnpinned]);
+    
+    const tip =
+	'pointer-events-none absolute bottom-full left-1/2 mb-3 -translate-x-1/2 rounded-lg border-2 border-base-content/15 bg-base-100 px-2 py-1 text-xs text-base-content whitespace-nowrap opacity-0 shadow-lg transition-opacity duration-100 group-hover:opacity-100 group-focus-visible:opacity-100';
     
     // Size of the desktop area, so windows can't be dragged or resized out of it
     let areaW = $state(0);
@@ -202,12 +216,12 @@
         <nav class="{pill} justify-self-center gap-2 px-2" aria-label="Apps">
             <button
             	type="button"
-            	title="Launchpad"
             	aria-label="Launchpad"
             	aria-pressed={shell.launchpadOpen}
             	onclick={() => shell.toggleLaunchpad()}
-            	class="relative grid size-10 cursor-pointer place-items-center rounded-xl transition-all hover:-translate-y-1 hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-primary"
+            	class="group relative grid size-10 cursor-pointer place-items-center rounded-xl transition-all hover:-translate-y-1 hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-primary"
                         >
+                <span class={tip} aria-hidden="true">Launchpad</span>
             	<svg viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true">
             		{#each [5, 12, 19] as cx}
             			{#each [5, 12, 19] as cy}<circle {cx} {cy} r="1.8" />{/each}
@@ -217,20 +231,22 @@
             		<span class="absolute bottom-0.5 left-1/2 h-1.5 w-4 -translate-x-1/2 rounded-full bg-primary"></span>
             	{/if}
             </button>
-            {#each DOCK_APPS as app (app.id)}
+            {#each dockApps as app (app.id)}
             	{@const status = wm.statusOf(app.id)}
             	<button
             		type="button"
-            		title={app.title}
             		aria-label={app.title}
-                    onclick={() => { shell.launchpadOpen = false; wm.toggle(app.id); }}
-            		class="relative grid size-10 cursor-pointer place-items-center rounded-xl text-lg transition-all hover:-translate-y-1 hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-primary"
+            		onclick={() => {
+            			shell.launchpadOpen = false;
+            			wm.toggle(app.id);
+            		}}
+            		class="group relative grid size-10 cursor-pointer place-items-center rounded-xl text-lg transition-all hover:-translate-y-1 hover:bg-primary hover:text-primary-content focus-visible:outline-2 focus-visible:outline-primary"
+            		transition:scale={{ duration: 150, start: 0.6 }}
             	>
+            		<span class={tip} aria-hidden="true">{app.title}</span>
             		{app.glyph}
             		{#if status !== 'closed'}
-            			<span
-            				class="absolute bottom-0.5 left-1/2 h-1.5 -translate-x-1/2 rounded-full transition-all {dockDot[status]}"
-            			></span>
+            			<span class="absolute bottom-0.5 left-1/2 h-1.5 -translate-x-1/2 rounded-full transition-all {dockDot[status]}"></span>
             		{/if}
             	</button>
             {/each}

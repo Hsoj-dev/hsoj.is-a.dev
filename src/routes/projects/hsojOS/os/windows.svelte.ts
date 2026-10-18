@@ -1,4 +1,4 @@
-// src\routes\projects\hsojOS\os\windows.svelte.ts
+// src/routes/projects/hsojOS/os/windows.svelte.ts
 import { getApp } from './apps';
 
 export const TITLEBAR_HEIGHT = 36;
@@ -108,6 +108,17 @@ class WindowManager {
 
 	close(id: string) {
 		this.windows = this.windows.filter((w) => w.id !== id);
+	}
+
+	/** Close every window of one app. Returns true if anything was open. */
+	closeApp(appId: string): boolean {
+		const before = this.windows.length;
+		this.windows = this.windows.filter((w) => w.appId !== appId);
+		return this.windows.length < before;
+	}
+
+	closeAll() {
+		this.windows = [];
 	}
 
 	/** Dock click: open, restore, focus, or minimize depending on the app's current state */

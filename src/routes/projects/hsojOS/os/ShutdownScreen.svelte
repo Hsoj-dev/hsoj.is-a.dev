@@ -1,7 +1,8 @@
-<!-- src\routes\projects\hsojOS\os\ShutdownScreen.svelte -->
+<!-- src/routes/projects/hsojOS/os/ShutdownScreen.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { sys } from './system.svelte';
 
 	let button: HTMLButtonElement | undefined = $state();
 	onMount(() => button?.focus());
@@ -22,7 +23,7 @@
 		<button
 			bind:this={button}
 			type="button"
-			onclick={() => location.reload()}
+			onclick={() => sys.powerOn()}
 			class="cursor-pointer rounded-xl border-2 border-white/40 px-4 py-1.5 text-sm transition-colors hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 		>
 			Power on

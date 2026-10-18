@@ -1,7 +1,8 @@
-<!-- src/routes/projects/hsojOS/os/apps/Youtube.svelte -->
+<!-- src/routes/projects/hsojOS/os/apps/YouTube.svelte -->
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
 
+	// Set PUBLIC_YOUTUBE_API_KEY in your .env (see the notes that came with this app)
 	const API_KEY = env.PUBLIC_YOUTUBE_API_KEY;
 
 	type Video = { id: string; title: string; channel: string; thumb: string };
@@ -54,7 +55,7 @@
 				type: 'video',
 				videoEmbeddable: 'true',
 				safeSearch: 'moderate',
-				maxResults: '12',
+				maxResults: '40', // costs the same quota as 12
 				q,
 				key: API_KEY ?? ''
 			});
@@ -141,7 +142,7 @@
 		</button>
 	</form>
 
-	<div class="min-h-0 flex-1">
+	<div class="@container min-h-0 flex-1">
 		{#if playing}
 			<iframe
 				title="YouTube player"
@@ -158,7 +159,8 @@
 				{error}
 			</p>
 		{:else if results.length > 0}
-			<ul class="grid h-full grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] content-start gap-3 overflow-auto p-3">
+			<!-- Cards get bigger as the window does: at least 13rem, or 16% of the window width -->
+			<ul class="grid h-full grid-cols-[repeat(auto-fill,minmax(max(13rem,16cqw),1fr))] content-start gap-4 overflow-auto p-4 @3xl:gap-6 @3xl:p-6">
 				{#each results as video (video.id)}
 					<li>
 						<button
@@ -172,7 +174,7 @@
 								loading="lazy"
 								class="aspect-video w-full rounded-lg border-2 border-transparent object-cover transition-colors group-hover:border-primary"
 							/>
-							<span class="line-clamp-2 text-sm font-bold group-hover:text-primary">{video.title}</span>
+							<span class="line-clamp-2 text-sm font-bold group-hover:text-primary @3xl:text-base">{video.title}</span>
 							<span class="truncate text-xs text-base-content/60">{video.channel}</span>
 						</button>
 					</li>
@@ -187,7 +189,7 @@
 					<p class="text-sm text-base-content/60">Search for a video, or paste a link.</p>
 					{#if !API_KEY}
 						<p class="text-xs text-warning">
-							No API key found, so search is off. Pasted links still work. 
+							No API key found, so search is off. Pasted links still work.
 						</p>
 					{/if}
 				</div>

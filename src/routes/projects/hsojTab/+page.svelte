@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\+page.svelte -->
+<!-- src\routes\projects\hsojTab\+page.svelte -->
 <script lang="ts">
   import Clock from "./Clock.svelte";
   import SearchBar from "./SearchBar.svelte";

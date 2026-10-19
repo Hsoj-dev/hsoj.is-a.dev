@@ -42,7 +42,7 @@ export const projects: Project[] = [
         slug: 'hsojOS',
         name: 'hsojOS',
         tagline: 'My Personal WebOS',
-        status: 'wip',
+        status: 'live',
         year: 2026,
         stack: ['Svelte', 'TypeScript', 'Tailwind'],
         repo: 'https://github.com/Hsoj-dev/hsojOS',
@@ -52,7 +52,7 @@ export const projects: Project[] = [
         slug: 'scrabbly',
         name: 'scrabbly',
         tagline: 'A Scrabble Training CLI App',
-        status: 'wip',
+        status: 'live',
         year: 2026,
         stack: ['JavaScript'],
         page: '/projects/scrabbly', 
@@ -70,13 +70,13 @@ export const projects: Project[] = [
     demo: 'https://saypi.blog',
   },
   {
-      slug: 'hsoj-tab',
+      slug: 'hsojTab',
       name: 'hsoj-tab',
       tagline: 'My Personal New Tab Page',
-      status: 'wip',
+      status: 'live',
       year: 2026,
       stack: ['Svelte', 'TypeScript', 'Tailwind'],
       repo: 'https://github.com/Hsoj-dev/hsoj-tab',
-      demo: 'https://hsoj.is-a.dev/projects/hsoj-tab'
+      demo: 'https://hsoj.is-a.dev/projects/hsojTab'
   },
 ];

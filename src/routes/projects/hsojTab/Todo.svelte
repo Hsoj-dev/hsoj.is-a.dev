@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\Todo.svelte -->
+<!-- src\routes\projects\hsojTab\Todo.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Panel from './Panel.svelte';
@@ -6,7 +6,7 @@
 
 	type Todo = { id: string; text: string; done: boolean };
 
-	const KEY = 'hsoj-tab:todos';
+	const KEY = 'hsojTab:todos';
 
 	let todos = $state<Todo[]>([]);
 	let loaded = $state(false);

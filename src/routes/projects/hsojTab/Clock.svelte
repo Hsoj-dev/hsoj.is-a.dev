@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\Clock.svelte -->
+<!-- src\routes\projects\hsojTab\Clock.svelte -->
 <script lang="ts">
     let now = $state<Date | null>(null);
 

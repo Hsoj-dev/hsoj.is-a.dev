@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\Panel.svelte -->
+<!-- src\routes\projects\hsojTab\Panel.svelte -->
 <script lang="ts">
     import type { Snippet } from "svelte";
 

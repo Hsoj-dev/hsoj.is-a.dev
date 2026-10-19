@@ -3,6 +3,7 @@
 @plugin '@tailwindcss/typography';
 @source "./routes/projects/hsojOS";
 @source "./routes/projects/hsoj-tab/";
+@source "./routes/projects/hsojTab/";
 
 @plugin "daisyui" {
   themes: false;

@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\Shortcuts.svelte -->
+<!-- src\routes\projects\hsojTab\Shortcuts.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Panel from './Panel.svelte';
@@ -6,7 +6,7 @@
 
 	type Shortcut = { id: string; name: string; url: string };
 
-	const KEY = 'hsoj-tab:shortcuts';
+	const KEY = 'hsojTab:shortcuts';
 
 	let shortcuts = $state<Shortcut[]>([]);
 	let loaded = $state(false);

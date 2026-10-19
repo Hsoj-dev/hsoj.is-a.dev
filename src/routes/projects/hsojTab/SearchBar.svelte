@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\SearchBar.svelte -->
+<!-- src\routes\projects\hsojTab\SearchBar.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { loadJSON, saveJSON } from './storage';
@@ -9,7 +9,7 @@
 		{ id: 'bing', name: 'Bing', action: 'https://www.bing.com/search' }
 	] as const;
 
-	const KEY = 'hsoj-tab:engine';
+	const KEY = 'hsojTab:engine';
 
 	let engineId = $state<string>(ENGINES[0].id);
 	let loaded = $state(false);

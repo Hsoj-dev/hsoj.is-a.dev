@@ -1,4 +1,4 @@
-<!-- src\routes\projects\hsoj-tab\NewsCard.svelte -->
+<!-- src\routes\projects\hsojTab\NewsCard.svelte -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -16,7 +16,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch('/projects/hsoj-tab/news');
+			const res = await fetch('/projects/hsojTab/news');
 			if (!res.ok) throw new Error(String(res.status));
 			const data: { articles: NewsArticle[] } = await res.json();
 			articles = data.articles;

@@ -1,5 +1,5 @@
-// src\routes\projects\hsoj-tab\news\+server.ts
-// Served at: GET /projects/hsoj-tab/news
+// src\routes\projects\hsojTab\news\+server.ts
+// Served at: GET /projects/hsojTab/news
 import { error, json } from '@sveltejs/kit';
 import { FREENEWSAPI_KEY } from '$env/static/private';
 import type { RequestHandler } from './$types';
@@ -74,7 +74,7 @@ async function buildArticles(): Promise<NewsArticle[]> {
 				url: data.original_url
 			});
 		} catch (e) {
-			console.error('[hsoj-tab/news] details failed for', item.uuid, e);
+			console.error('[hsojTab/news] details failed for', item.uuid, e);
 		}
 		await sleep(REQUEST_GAP_MS);
 	}
@@ -91,7 +91,7 @@ export const GET: RequestHandler = async () => {
 		const articles = await inFlight;
 		if (articles.length) cache = { at: Date.now(), articles };
 	} catch (e) {
-		console.error('[hsoj-tab/news]', e);
+		console.error('[hsojTab/news]', e);
 	}
 
 	// serve stale data if a refresh failed

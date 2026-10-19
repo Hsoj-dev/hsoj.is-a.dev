@@ -16,6 +16,11 @@
     let isHsojOS = $derived(
       page.url.pathname === OS_PATH || page.url.pathname.startsWith(OS_PATH + '/')
     );
+
+    const TAB_PATH = '/projects/hsojTab';
+    let isHsojTab = $derived(
+      page.url.pathname === TAB_PATH || page.url.pathname.startsWith(TAB_PATH + '/')
+    );
   
     onMount(loadPrefs); // must stay above the effect
     $effect(() => {
@@ -30,7 +35,10 @@
 </svelte:head>
 
 {#if isHsojOS}
-  {@render children()}
+    {@render children()}
+{:else if isHsojTab}
+    <Background />   
+    {@render children()}
 {:else}
     <Background />
     

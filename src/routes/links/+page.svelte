@@ -8,11 +8,26 @@
         <p>> LINKS</p> 
     </div>
     <div class="p-5">
-        <ul>
-            <li>* <a href={resolve("/games")} class="link link-hover font-bold">Games</a> - I sometimes dabble in game dev</li>
-            <li>* <a href={resolve("/artworks")} class="link link-hover font-bold">Artwork</a> - Some of my artworks (not that many yet)</li>
-            <li>* <a href={resolve("/stories")} class="link link-hover font-bold">Stories</a> - Still zero but I do plan to write someday</li>
-            <li>* <a href={resolve("/ukulele-notes")} class="link link-hover font-bold">Ukulele Notes</a> - my ukulele notes</li>
-        </ul>
+        <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-left">
+            <p>* <a href={resolve("/games")} class="link link-hover font-bold">Games</a></p>
+            <span>
+                - I sometimes dabble in game dev
+            </span>
+
+            <!-- <p>* <a href={resolve("/artworks")} class="link link-hover font-bold">Artwork</a></p>
+            <span>
+                 - Some of my artworks (not that many yet)
+            </span> -->
+
+            <!-- <p>* <a href={resolve("/stories")} class="link link-hover font-bold">Stories</a></p>
+            <span>
+                - Still zero but I do plan to write someday
+            </span> -->
+
+            <!-- <p>* <a href={resolve("/ukulele-notes")} class="link link-hover font-bold">Ukulele</a></p>
+            <span>
+                - my ukulele related stuff
+            </span> -->
+        </div>
     </div>
 </div>

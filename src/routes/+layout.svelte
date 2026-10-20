@@ -39,6 +39,7 @@
 {:else if isHsojTab}
     <Background />   
     {@render children()}
+    <DevSwitcher />
 {:else}
     <Background />
     

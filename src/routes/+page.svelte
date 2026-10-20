@@ -43,17 +43,17 @@
         </div>
         <div class="p-5">
             <ul>
-                <li>LOCATION: AT HOME</li>
+                <li>LOCATION: AT SCHOOL</li>
                 <hr>
-                <li>MOOD: BORED</li>
+                <li>MOOD: TIRED</li>
                 <hr>
                 <li>READING: DC Absolute Comics</li>
                 <hr>
-                <li>PLAYING: Tunic, Albion, Brawhalla</li>
+                <li>PLAYING: Outer Wilds, Brawhalla</li>
                 <hr>
                 <li>WATCHING: DC Tomorrowverse Movies</li>
                 <hr>
-                <li>LEARNING: Titration</li>
+                <li>LEARNING: Chromatography</li>
             </ul>
         </div>
     </div>
